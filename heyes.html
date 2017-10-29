@@ -1,0 +1,92 @@
+<html>
+<head>
+    <script src="jquery.min.js"></script>
+    <script src="mousetrap.min.js"></script>
+    <script>
+        var blinkTimer;
+	function lookRight() {
+	    $('#pl').animate({left: '304px'}, 50);
+	    $('#pr').animate({right: '20px'}, 50);
+	}
+	function lookMiddle() {
+	    $('#pl').animate({left: '180px'}, 50);
+	    $('#pr').animate({right: '180px'}, 50);
+	}
+	function lookLeft() {
+	    $('#pl').animate({left: '27px'}, 50);
+	    $('#pr').animate({right: '298px'}, 50);
+	}
+	function blink() {	    
+	    $("#eyelids").animate({height: "100%"}, 100);
+	    $("#eyelids").animate({height: "20%"}, 100);
+	}
+	function blinkRnd() {
+	    blink();
+	    clearInterval(blinkTimer);
+	    var nextDelay=Math.floor((Math.random() * 3000) + 1800);
+	    blinkTimer=setInterval(blinkRnd, nextDelay);
+	}
+    </script>
+<style>
+body {
+	background-color: #000000;
+}
+div#eyeframe {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	height: 100%;
+	width: 912px;
+	//border: 1px solid #0000ff;d
+	visibility: visible;
+}
+img#eyes {
+	z-index: -2;
+	position: absolute;
+	display: block;
+	bottom: 80px;
+}
+div.pupil {
+	z-index: -1;
+	position: absolute;
+	background-color: #000000;
+	height: 80px;
+	width: 70px;
+	border-radius: 50%;
+}
+#pl {
+	position: absolute;
+	left: 180px;
+	bottom: 180px;
+}
+#pr {
+	position: absolute;
+	right: 180px;
+	bottom: 180px;
+}
+#eyelids {
+	display: block;
+	z-index: 9999;
+	width: 100%;
+	height: 20%;
+	background-color: #000;
+}
+</style>
+</head>
+<body>
+<div id="eyeframe">
+<div id="eyelids">
+<img id="eyes" src="heyes.png">
+<div class="pupil" id="pl"></div>
+<div class="pupil" id="pr"></div>
+</div>
+</div>
+<script>
+    Mousetrap.bind('d', lookRight);
+    Mousetrap.bind('s', lookMiddle);
+    Mousetrap.bind('a', lookLeft);
+    Mousetrap.bind('w', blink);
+    blinkRnd();
+</script>
+</body>
+</html>
